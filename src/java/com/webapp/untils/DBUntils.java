@@ -132,4 +132,28 @@ public class DBUntils {
  
         pstm.executeUpdate();
     }
+    public Product[] searchProduct(Connection conn, Product product) throws SQLException{
+        try{
+            String sql = "SELECT * FROM dbo.PRODUCT WHERE NAME = '?'";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, "%" +product.getName() + "%" );
+        
+            ResultSet rs = pstm.executeQuery();
+            ArrayList list = new ArrayList();
+            while(rs.next()){
+                String id = rs.getString("code");
+                String name = rs.getString("name");
+                String price = rs.getString("price");
+                Product pro = new Product(name, name, 0);
+                list.add(pro);
+            }
+            Product[] results = new Product[list.size()];
+            list.toArray(results);
+            
+            return results;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
