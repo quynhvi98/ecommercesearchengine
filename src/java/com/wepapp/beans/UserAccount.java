@@ -45,4 +45,11 @@ public class UserAccount {
    public void setPassword(String password) {
        this.password = password;
    }
+
+    public UserAccount(String userName, String gender, String password) {
+        this.userName = userName;
+        this.gender = gender;
+        this.password = password;
+    }
+   
 }
